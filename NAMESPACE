@@ -1,0 +1,15 @@
+importFrom(XML, names.XMLNode, toString.XMLNode, xmlAttrs, xmlChildren,
+           xmlElementsByTagName, xmlGetAttr, xmlName, xmlNamespace,
+           xmlNode, xmlRoot, xmlSApply, xmlTreeParse, xmlTree)
+
+importFrom(RCurl, getCurlHandle, getURLContent, postForm, curlPerform, CFILE, close)
+
+importFrom(tools, md5sum)
+
+export("flowRep.ls", "flowRep.get", "getFlowRepositoryURL", 
+       "setFlowRepositoryURL", "setFlowRepositoryCredentials")
+
+exportClasses("flowRepData", "fcsProxy")
+
+exportMethods("summary", "is.downloaded", "download")
+

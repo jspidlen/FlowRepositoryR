@@ -1,0 +1,20 @@
+Package: FlowRepositoryR
+Type: Package
+Title: FlowRepository R Interface
+Version: 0.0.6
+Author: Josef Spidlen
+Maintainer: Josef Spidlen <jspidlen@bccrc.ca>
+Description: Provides an interface to search and download data and annotations from FlowRepository (flowrepository.org)
+Depends: R (>= 3.0.0)
+Imports: XML, RCurl, tools
+Suggests: flowCore, methods
+Collate: AllClasses.R
+         settings.R
+         helper-functions.R
+         parsing-methods.R
+         summary-methods.R
+         accessor-methods.R
+         methods.R
+         exported-functions.R
+License: Artistic-2.0
+biocViews: Infrastructure, FlowCytometry
