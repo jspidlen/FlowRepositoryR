@@ -43,18 +43,19 @@ Download the files
 > # You can specify the destination, whether to show progress and other options.
 > x <- download(x)
 Downloading to /home/jspidlen/FR-FCM-ZZ3M 
-File EMBO Group1 Signaling timecourse_1_01 IL_4 Unstimulated_0_min.fcs downloaded.
-File EMBO Group1 Signaling timecourse_1_02 IL_4 1_min.fcs downloaded.
-File EMBO Group1 Signaling timecourse_1_03 IL-4 2 min.fcs downloaded.
-File EMBO Group1 Signaling timecourse_1_04 IL-4 4 min.fcs downloaded.
-File EMBO Group1 Signaling timecourse_1_05 IL-4 8 min.fcs downloaded.
+File EMBO Group1 Signaling timecourse_1_01 IL_4_Unstimulated_0_min.fcs downloaded.
+File EMBO Group1 Signaling timecourse_1_02 IL_4_1_min.fcs downloaded.
+File EMBO Group1 Signaling timecourse_1_03 IL_4_2_min.fcs downloaded.
+File EMBO Group1 Signaling timecourse_1_04 IL_4_4_min.fcs downloaded.
+File EMBO Group1 Signaling timecourse_1_05 IL_4_8_min.fcs downloaded.
 ... <snip> ...
 File Full_Manual_PhosphoFlow_Course_Irish_3_2010.pdf downloaded.
 Download finished.
 >
 > # Now your dataset is downloaded
 > summary(x)
-A flowRepData object (FlowRepository dataset) EMBO Timecourse of IL-4 and IL-7 in PBMC B and T cells
+A flowRepData object (FlowRepository dataset) 
+EMBO Timecourse of IL-4 and IL-7 in PBMC B and T cells
 14 FCS files, 1 attachments, downloaded
 > 
 ```
@@ -64,7 +65,7 @@ Locate your data
 > length(x@fcs.files)
 [1] 14
 > x@fcs.files[[4]]@localpath
-[1] "/home/jspidlen/FR-FCM-ZZ3M/EMBO Group1 Signaling timecourse_1_04 IL-4 4 min.fcs"
+[1] "/home/jspidlen/FR-FCM-ZZ3M/EMBO Group1 Signaling timecourse_1_04 IL_4_4_min.fcs"
 ```
 
 Review details about a dataset
