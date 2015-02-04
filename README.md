@@ -11,7 +11,6 @@ Load the library
 
 Set FlowRepository credentials (optional)
 ```R
->
 > # Next step is required only if you want access to private datasets
 > # credentials file: 2 lines, your email on line 1, your password on line 2
 > setFlowRepositoryCredentials("/path/to/flowrepository.credentials.txt")
@@ -60,5 +59,29 @@ A flowRepData object (FlowRepository dataset) EMBO Timecourse of IL-4 and IL-7 i
 > 
 ```
 
+Locate your data
+```R
+> length(x@fcs.files)
+[1] 14
+> x@fcs.files[[4]]@localpath
+[1] "/home/jspidlen/FR-FCM-ZZ3M/EMBO Group1 Signaling timecourse_1_04 IL-4 4 min.fcs"
+```
 
+Review details about a dataset
+```R
+> str(x)
+```
 
+Load files for further analysis
+```R
+> library(flowCore)
+> # Assuming the files are consitent in the channels used, you can load
+> # them in a single flowSet. See documentation for the flowCore library
+> # for additional details
+> ds <- read.flowSet(path="/home/jspidlen/FR-FCM-ZZ3M", pattern="*.fcs")
+> ds
+A flowSet with 14 experiments.
+
+  column names:
+  FSC-A SSC-A FITC-A PE-A APC-A PerCP-A Time
+```
