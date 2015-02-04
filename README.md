@@ -1,6 +1,13 @@
 # FlowRepositoryR
 FlowRepositoryR - R library to access FlowRepository.org 
 
-Please note that this is an early version of the library and I am still working on it.
-Use at own risk.
+## Quick Start Guide
+
+```R
+# Load the library
+# Requires you to have libraries XML, RCurl, and tools.
+library(FlowRepositoryR)
+```
+
+
 
