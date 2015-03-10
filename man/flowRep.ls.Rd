@@ -1,6 +1,5 @@
 \name{flowRep.ls}
 \alias{flowRep.ls}
-\alias{internal.flowRep.ls}
 
 \title{
   Get a vector of identifiers of datasets available in FlowRepository
@@ -31,13 +30,10 @@
 
 \author{Josef Spidlen}
 
-\seealso{
-  TODO: Add cross references when available.
-}
+\seealso{\code{\link{flowRep.get}}, \code{\link{setFlowRepositoryCredentials}}}
 
 \examples{
   flowRep.ls()
 }
 
 \keyword{methods}
-
