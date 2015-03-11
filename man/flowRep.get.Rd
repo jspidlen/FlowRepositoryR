@@ -7,7 +7,7 @@
 
 \description{
   This function connects to FlowRepository (flowrepository.org) via an XML-based API and 
-  retrieves metadata about a specified dataset in the form of a \code{\link{flowRepData}}
+  retrieves metadata about a specified dataset in the form of a \code{\linkS4class{flowRepData}}
   object.
  }
 

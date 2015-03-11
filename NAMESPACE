@@ -9,7 +9,7 @@ importFrom(tools, md5sum)
 export("flowRep.ls", "flowRep.get", "getFlowRepositoryURL", 
        "setFlowRepositoryURL", "setFlowRepositoryCredentials")
 
-exportClasses("flowRepData", "fcsProxy")
+exportClasses("flowRepData", "fcsProxy", "attachmentProxy", "flowRepOrganization")
 
 exportMethods("summary", "is.downloaded", "download")
 

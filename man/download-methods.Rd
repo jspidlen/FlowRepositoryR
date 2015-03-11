@@ -13,12 +13,12 @@
 }
 
 \usage{
-  download(object, ...)
+  download(object, \dots)
 }
 
 \arguments{
   \item{object}{Object of class \code{\linkS4class{fileProxy}} or \code{\linkS4class{flowRepData}}.}
-  \item{...}{Additional options, see the details section.}
+  \item{\dots}{Additional options, see the details section.}
 }
 
 \details{
