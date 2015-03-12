@@ -1,8 +1,6 @@
 \name{is.downloaded}
 \alias{is.downloaded}
-\alias{is.downloaded,fileProxy-method}
 \alias{is.downloaded,fileProxy,is.downloaded-method}
-\alias{is.downloaded,flowRepData-method}
 \alias{is.downloaded,flowRepData,is.downloaded-method}
 
 \title{Check if a dataset or a file proxy is downloaded}

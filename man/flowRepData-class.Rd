@@ -3,6 +3,7 @@
 \alias{flowRepData-class}
 \alias{flowRepData}
 \alias{summary,flowRepData-method}
+\alias{is.downloaded,flowRepData-method}
 
 \title{'flowRepData': a class for storing metadata about a FlowRepository dataset}
 
@@ -160,6 +161,16 @@
     See \code{\link{summary}} for details.
       \emph{Usage:}
       \code{summary(flowRepData)}
+    }
+    
+    \item{is.downloaded}{Return TRUE if all FCS files and attachments
+      referenced from this \code{flowRepData} object are downloaded
+      to your local file system. This is determined by the \code{localpath}
+      slot of the \code{\linkS4class{fileProxy}} objects in the
+      fcs.files list and attachments list. No other checks are performed.
+      See \code{\link{is.downloaded}} for details.
+      \emph{Usage:}
+      \code{is.downloaded(flowRepData)}
     }
 
   }
