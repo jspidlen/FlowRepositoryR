@@ -151,8 +151,8 @@ fcsProxy <- function(name, url, size = 0, md5sum = NULL, fcs.version = NULL, loc
 setClass("attachmentProxy",
          representation = representation(
            description = "characterOrNULL"),
-         contains = "fileProxy",
-         prototype = list(
+           contains = "fileProxy",
+           prototype = list(
            name = "defaultAttachmentName.ext",
            url = NULL,
            size = 0,

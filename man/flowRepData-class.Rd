@@ -4,6 +4,7 @@
 \alias{flowRepData}
 \alias{summary,flowRepData-method}
 \alias{is.downloaded,flowRepData-method}
+\alias{download,flowRepData-method}
 
 \title{'flowRepData': a class for storing metadata about a FlowRepository dataset}
 
@@ -161,6 +162,14 @@
     See \code{\link{summary}} for details.
       \emph{Usage:}
       \code{summary(flowRepData)}
+    }
+    
+    \item{download}{Download all the referenced FCS files and attachments,
+      fill out their \code{localpath} slots and return an updated copy
+      of the \code{flowRepData} object.
+      See \code{\link{download}} for details.
+      \emph{Usage:}
+      \code{download(flowRepData)}
     }
     
     \item{is.downloaded}{Return TRUE if all FCS files and attachments

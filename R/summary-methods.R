@@ -24,7 +24,7 @@ setMethod(
   signature = signature(object = "flowRepData"),
   definition = function(object, ...)
   {
-    cat(paste0("A flowRepData object (FlowRepository dataset) ", object@name, "\n", 
+    cat(paste0("A flowRepData object (FlowRepository dataset) ", object@name, "\n",
       length(object@fcs.files), " FCS files, ",
       length(object@attachments), " attachments, ",
       ifelse(is.downloaded(object), "", "NOT "), "downloaded\n"))
@@ -39,5 +39,14 @@ setMethod(
     if (is.downloaded(object)) downloaded <- ' ('
     else downloaded <- ' (NOT '
     cat(paste0("A fileProxy object (proxy for a file) ", object@name, downloaded, "downloaded)\n"))
+  }
+)
+
+setMethod(
+  "summary",
+  signature = signature(object = "flowRepOrganization"),
+  definition = function(object, ...)
+  {
+    cat(paste(object@name, object@street, object@city, object@zip, object@state, object@country, sep="\n"))
   }
 )

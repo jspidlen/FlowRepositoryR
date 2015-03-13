@@ -4,6 +4,7 @@
 \alias{fileProxy}
 \alias{summary,fileProxy-method}
 \alias{is.downloaded,fileProxy-method}
+\alias{download,fileProxy-method}
 
 \title{'fileProxy': a class representing a proxy to a file in FlowRepository}
 
@@ -32,11 +33,11 @@
       name of the FlowRepository file.
     }
     
-    \item{\code{name}:}{Object of class \code{character} containing the
+    \item{\code{url}:}{Object of class \code{character} containing the
       url of the FlowRepository file.
     }
 
-    \item{\code{name}:}{Object of class \code{numeric} containing the size
+    \item{\code{size}:}{Object of class \code{numeric} containing the size
       of the FlowRepository file in bytes.
     }
     
@@ -62,6 +63,15 @@
     See \code{\link{summary}} for details.
       \emph{Usage:}
       \code{summary(fileProxy)}
+    }
+    
+    \item{download}{Download the referenced file to the local 
+      file system, fill out the \code{localpath} slot and return an 
+      updated copy of the \code{fileProxy} object.
+      See \code{\link{download}} for details.
+      \emph{Usage:}
+      \code{download(fileProxy, dirpath = NULL, filepath = NULL, }\cr
+      \code{  curlHandle = getCurlHandle(cookiefile = ""), show.progress = TRUE, ...)}\cr
     }
     
     \item{is.downloaded}{Return TRUE if the \code{localpath} slot

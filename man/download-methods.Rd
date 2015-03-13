@@ -1,8 +1,6 @@
 \name{download}
 \alias{download}
-\alias{download,fileProxy-method}
 \alias{download,fileProxy,download-method}
-\alias{download,flowRepData-method}
 \alias{download,flowRepData,download-method}
 
 \title{Download dataset files}
