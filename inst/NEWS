@@ -1,0 +1,11 @@
+CHANGES IN VERSION 0.0.13
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Major documentation updates
+
+NEW FEATURES
+
+    o Support for forgetting FlowRepository credentials
+
