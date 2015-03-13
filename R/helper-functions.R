@@ -20,55 +20,60 @@
 ###############################################################################
 
 
-# Extracts a numeric value of an element, i.e., <value>500</value> --> 500
+## Extracts a numeric value of an element, i.e., <value>500</value> --> 500
 getElValAsNum <- function(element)
 {
-  res <- NULL
-  try(res <- as.numeric(as.character(element[[1]]$value)), silent = TRUE)
-  res
+    res <- NULL
+    try(res <- as.numeric(as.character(element[[1]]$value)), silent = TRUE)
+    res
 }
 
-# Extracts a character value of an element, i.e., <value>text</value> --> "text"
+## Extracts a character value of an element, i.e., <value>text</value> --> "text"
 getElValAsChar <- function(element)
 {
-  res <- NULL
-  try(res <- as.character(element[[1]]$value), silent = TRUE)
-  res
+    res <- NULL
+    try(res <- as.character(element[[1]]$value), silent = TRUE)
+    res
 }
 
-# Extracts a logicle value of an element, i.e., <value>true</value> --> TRUE
+## Extracts a logicle value of an element, i.e., <value>true</value> --> TRUE
 getElValAsLogicle <- function(element)
 {
-  res <- NA
-  try(res <- as.logical(as.character(element[[1]]$value)), silent = TRUE)
-  if (is.na(res)) res <- NULL
-  res
+    res <- NA
+    try(res <- as.logical(as.character(element[[1]]$value)), silent = TRUE)
+    if (is.na(res)) res <- NULL
+    res
 }
 
+## Parsing the XML tree and using classes created from element names
 smartTreeParse = function(file, ...) 
 {
-  handlers = list(comment=function(x, ...)
-  {
-      NULL
-  },
-  startElement = function(x, ...) 
-  {
-      class(x)=c(paste(make.names(c(xmlNamespace(x), xmlName(x))), collapse="_"), make.names(xmlNamespace(x)), class(x))
-      x
-  }
-  )
-  xmlTreeParse(file, handlers=handlers, asTree=TRUE, fullNamespaceInfo=TRUE, ...)
+    handlers = list(
+        comment=function(x, ...)
+        {
+            NULL
+        },
+        startElement = function(x, ...) 
+        {
+            class(x)=c(paste(make.names(c(xmlNamespace(x), xmlName(x))), 
+                collapse="_"), make.names(xmlNamespace(x)), class(x))
+            x
+        }
+    )
+    xmlTreeParse(file, handlers=handlers, asTree=TRUE, 
+        fullNamespaceInfo=TRUE, ...)
 }
 
 flowRep.login <- function(curlHandle)
 {
-  credentials = getFlowRepositoryCredentials()
-  response = postForm(paste0(getFlowRepositoryURL(), "loginapi"), email = credentials[1], pass = credentials[2], curl = curlHandle, .opts = list(ssl.verifypeer = FALSE)) 
+    credentials = getFlowRepositoryCredentials()
+    response = postForm(paste0(getFlowRepositoryURL(), "loginapi"), 
+        email = credentials[1], pass = credentials[2], curl = curlHandle, 
+        .opts = list(ssl.verifypeer = FALSE)) 
 }
 
 flowRep.logout <- function(curlHandle)
 {
-  response = getURLContent(paste0(getFlowRepositoryURL(), "logout"), curl = curlHandle, .opts = list(ssl.verifypeer = FALSE))   
+    response = getURLContent(paste0(getFlowRepositoryURL(), "logout"), 
+        curl = curlHandle, .opts = list(ssl.verifypeer = FALSE))   
 }
-
-
