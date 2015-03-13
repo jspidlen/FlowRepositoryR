@@ -21,7 +21,7 @@
 
 
 # Extracts a numeric value of an element, i.e., <value>500</value> --> 500
-getElementValueAsNumeric <- function(element)
+getElValAsNum <- function(element)
 {
   res <- NULL
   try(res <- as.numeric(as.character(element[[1]]$value)), silent = TRUE)
@@ -29,7 +29,7 @@ getElementValueAsNumeric <- function(element)
 }
 
 # Extracts a character value of an element, i.e., <value>text</value> --> "text"
-getElementValueAsCharacter <- function(element)
+getElValAsChar <- function(element)
 {
   res <- NULL
   try(res <- as.character(element[[1]]$value), silent = TRUE)
@@ -37,7 +37,7 @@ getElementValueAsCharacter <- function(element)
 }
 
 # Extracts a logicle value of an element, i.e., <value>true</value> --> TRUE
-getElementValueAsLogicle <- function(element)
+getElValAsLogicle <- function(element)
 {
   res <- NA
   try(res <- as.logical(as.character(element[[1]]$value)), silent = TRUE)
