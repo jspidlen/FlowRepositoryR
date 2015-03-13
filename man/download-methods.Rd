@@ -54,37 +54,50 @@
 \author{Josef Spidlen}
 
 \examples{
+  ## We will get a small dataset
+  mySmallDataset <- flowRep.get("FR-FCM-ZZ3X")
+  ## And download a single attachment file
+  mySmallDataset@attachments[[1]] <- download(mySmallDataset@attachments[[1]])
+  summary(mySmallDataset)
+  mySmallDataset@attachments[[1]]@localpath
+
 \dontrun{
-  # Get a dataset
+  ## A more usefull example will download the whole dataset etc.
+  ## We are tagging it as "Do Not RUN" since downloading a potentially large amount
+  ## of data could get time consuming
+  
+  ## Get a dataset
   myDataset <- flowRep.get("FR-FCM-ZZ3X")
   
-  # The files are not downloaded yet
+  ## The files are not downloaded yet
   summary(myDataset)
   
-  # We can find out about individual file proxies
+  ## We can find out about individual file proxies
   summary(myDataset@fcs.files[[1]])
   
-  # A single file proxy can be downloaded
+  ## A single file proxy can be downloaded
   singleFile <- download(myDataset@fcs.files[[1]])
   summary(singleFile)
   
-  # The file is downloaded to your home directory
+  ## The file is downloaded to your home directory
   singleFile@localpath
   
-  # Next, you could use it with flowCore and friends, e.g.,
+  ## Next, you could use it with flowCore and friends, e.g.,
   library(flowCore)
   myData <- read.FCS(singleFile@localpath)
   summary(myData)
   
-  # The code above is just to demonstrate that it is
-  # possible to get individial files. However, typically, 
-  # we will want to download the whole dataset.
+  ## The code above is just to demonstrate that it is
+  ## possible to get individial files. However, typically, 
+  ## we will want to download the whole dataset.
   myDataset <- download(myDataset)
   summary(myDataset)
-  # This downloaded all the files to your home directory
-  # This is where you find your data
+  
+  ## This downloaded all the files to your home directory
+  ## This is where you find your data
   unlist(lapply(myDataset@fcs.files, function(x) paste(x@localpath)))
-  # And this is where you find the attachments of that dataset
+  
+  ## And this is where you find the attachments of that dataset
   unlist(lapply(myDataset@attachments, function(x) paste(x@localpath)))
 }
 }

@@ -15,12 +15,18 @@
 }
 
 \arguments{
-  \item{include.private}{Whether to include private experiments in the list. This only works if credentials to access FlowRepository have been provided. By default, only public experiments will be listed.}
+  \item{include.private}{Whether to include private experiments in the list. This only works if credentials 
+  to access FlowRepository have been provided. By default, only public experiments will be listed.}
 }
 
 \details{
   An HTTP GET request retrieves an XML from FlowRepository, and this XML 
   is parsed to extract the list of identifiers of public experiments.
+}
+
+\value{
+  A vector of objects of class \code{character} containing strings with FlowRepository dataset identifiers
+  available.
 }
 
 \references{

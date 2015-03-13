@@ -20,6 +20,10 @@
   being used to get and set the URL, respectively.
 }
 
+\value{
+  An object of class \code{character} containing the FlowRepository URL.
+}
+
 \references{
   Spidlen Josef. FlowRepository Resources for Developers.\cr
   http://flowrepository.org/developers

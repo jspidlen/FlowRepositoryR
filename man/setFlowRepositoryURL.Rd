@@ -17,13 +17,19 @@
 }
 
 \arguments{
-\item{url}{URL of the FlowRepository instance that the library should be communicating with.}
+  \item{url}{URL of the FlowRepository instance that the library should be communicating with.}
 }
 
 \details{
   FlowRepository URL is being stored with other settings in a global environment in the 
   library namespace. The \code{\link{getFlowRepositoryURL}} and setFlowRepositoryURL are
   being used to get and set the URL, respectively.
+}
+
+\value{
+  The return value is not expected to be useful. It is just the the value of evaluting 
+  the URL assignment expression, which is typically an object of class \code{character} 
+  containing a copy of the URL that was set.
 }
 
 \references{
@@ -36,9 +42,15 @@
 \seealso{\code{\link{getFlowRepositoryURL}}}
 
 \examples{
-\dontrun{
+  ## Save current URL
+  tmpURL <- getFlowRepositoryURL()
+  ## Temporarily set the URL to localhost
   setFlowRepositoryURL("http://localhost")
-}
+  ## Check that it is set
+  getFlowRepositoryURL()
+  ## Now set it back and check again
+  setFlowRepositoryURL(tmpURL)
+  getFlowRepositoryURL()
 }
 
 \keyword{methods}

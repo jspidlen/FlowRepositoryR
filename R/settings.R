@@ -69,6 +69,12 @@ setFlowRepositoryCredentials <- function(filename = NULL, email = NULL, password
   }
 }
 
+# Exported
+forgetFlowRepositoryCredentials <- function() {
+  .FlowRepository.env$.FlowRepository.User.Email <- ''
+  .FlowRepository.env$.FlowRepository.User.Password <- ''
+}
+
 # NOT Exported
 getFlowRepositoryCredentials <- function() {
   c(.FlowRepository.env$.FlowRepository.User.Email, .FlowRepository.env$.FlowRepository.User.Password)

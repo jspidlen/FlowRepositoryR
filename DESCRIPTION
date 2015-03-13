@@ -1,7 +1,7 @@
 Package: FlowRepositoryR
 Type: Package
 Title: FlowRepository R Interface
-Version: 0.0.12
+Version: 0.0.13
 Author: Josef Spidlen
 Maintainer: Josef Spidlen <jspidlen@bccrc.ca>
 Description: Provides an interface to search and download data and annotations from FlowRepository (flowrepository.org)

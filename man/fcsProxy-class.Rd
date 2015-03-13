@@ -140,4 +140,10 @@
   \code{\link{download}}
 }
 
+\examples{
+  myDataset <- flowRep.get("FR-FCM-ZZ3X")
+  summary(myDataset@fcs.files[[1]])
+  str(myDataset@fcs.files[[1]])
+}
+
 \keyword{classes}

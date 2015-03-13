@@ -41,7 +41,13 @@
 \details{
   The credentials are stored locally in an environment within the namespace
   in the FlowRepositoryR library. Your credentials will be forgotten when 
-  you quit your R session.
+  you quit your R session, or when you call the \code{\link{forgetFlowRepositoryCredentials}} 
+  function.
+}
+
+\value{
+  The return value is not expected to be useful.
+  An empty string (an object of class \code{character} with 0 characters).  
 }
 
 \references{
@@ -51,8 +57,15 @@
 
 \author{Josef Spidlen}
 
-\examples{\dontrun{
+\examples{
+  # Let's set credentials
   setFlowRepositoryCredentials <- function(email = "boo@gmail.com", password = "foo123456")
-}}
+  # Now do some work with FlowRepository...
+  #
+  # And now let's forget those credentials
+  forgetFlowRepositoryCredentials()
+}
+
+\seealso{\code{\link{forgetFlowRepositoryCredentials}}}
 
 \keyword{methods}

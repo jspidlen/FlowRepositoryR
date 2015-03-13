@@ -32,6 +32,12 @@
   is parsed to extract metadata about the specified experiment (i.e., dataset).
 }
 
+\value{
+  A \code{\linkS4class{flowRepData}} object as long as referenced dataset is found in FlowRepository
+  and the user has access to it. An error is thrown otherwise.
+}
+
+
 \references{
   Spidlen Josef. FlowRepository Resources for Developers.\cr
   http://flowrepository.org/developers
