@@ -28,63 +28,71 @@
 .FlowRepository.env$.FlowRepository.URL <- 'https://flowrepository.org/'
 .FlowRepository.env$.FlowRepository.ClientID <- 'FlowRepositoryRyzJl74CNkUp1Kpb'
 
-# Exported
+## Exported
 getFlowRepositoryURL <- function() {
-  .FlowRepository.env$.FlowRepository.URL
+    .FlowRepository.env$.FlowRepository.URL
 }
 
-# Exported
+## Exported
 setFlowRepositoryURL <- function(url) {
-  if(substring(url, nchar(url)) != "/") url <- paste0(url, "/")
-  .FlowRepository.env$.FlowRepository.URL <- url
+    if(substring(url, nchar(url)) != "/") url <- paste0(url, "/")
+    .FlowRepository.env$.FlowRepository.URL <- url
 }
 
-# NOT Exported
+## NOT Exported
 getFlowRepositoryClientID <- function() {
-  .FlowRepository.env$.FlowRepository.ClientID
+    .FlowRepository.env$.FlowRepository.ClientID
 }
 
 .FlowRepository.env$.FlowRepository.User.Email <- ''
 .FlowRepository.env$.FlowRepository.User.Password <- ''
 
-# Exported
-setFlowRepositoryCredentials <- function(filename = NULL, email = NULL, password = NULL) {
-  if(!is.null(filename)) {
-    con = file(filename, open="r")
-    line = readLines(con, 2) 
-    if (length(line) >= 2) {
-      email <- line[1]
-      password <- line[2]
+## Exported
+setFlowRepositoryCredentials <- function(filename = NULL, email = NULL, 
+    password = NULL) 
+{
+    if(!is.null(filename)) {
+        con = file(filename, open="r")
+        line = readLines(con, 2) 
+        if (length(line) >= 2) {
+            email <- line[1]
+            password <- line[2]
+        }
+        close(con)
+    } else {
+        if (is.null(email) && interactive()) 
+            email <- readline("Please enter your email:    ")
+        if (is.null(password) && interactive()) 
+            password <- readline("Please enter your password: ")
     }
-    close(con)
-  } else {
-    if (is.null(email) && interactive()) email <- readline("Please enter your email:    ")
-    if (is.null(password) && interactive()) password <- readline("Please enter your password: ")
-  }
   
-  if (!is.null(email) && !is.null(password) && nchar(password) > 0 && nchar(email) > 0) {
-    .FlowRepository.env$.FlowRepository.User.Email <- email
-    .FlowRepository.env$.FlowRepository.User.Password <- password
-  } else {
-    stop("Please provide either a file with email and password, or your email and password directly as arguments of this function.")  
-  }
+    if (!is.null(email) && !is.null(password) && nchar(password) > 0 && 
+        nchar(email) > 0) 
+    {
+        .FlowRepository.env$.FlowRepository.User.Email <- email
+        .FlowRepository.env$.FlowRepository.User.Password <- password
+    } else {
+        stop(paste("Please provide either a file with email and password,",
+            "or your email and password directly as arguments."))
+    }
 }
 
 # Exported
 forgetFlowRepositoryCredentials <- function() {
-  .FlowRepository.env$.FlowRepository.User.Email <- ''
-  .FlowRepository.env$.FlowRepository.User.Password <- ''
+    .FlowRepository.env$.FlowRepository.User.Email <- ''
+    .FlowRepository.env$.FlowRepository.User.Password <- ''
 }
 
 # NOT Exported
 getFlowRepositoryCredentials <- function() {
-  c(.FlowRepository.env$.FlowRepository.User.Email, .FlowRepository.env$.FlowRepository.User.Password)
+    c(.FlowRepository.env$.FlowRepository.User.Email, 
+        .FlowRepository.env$.FlowRepository.User.Password)
 }
 
 # NOT Exported
 haveFlowRepositoryCredentials <- function() {
-  !is.null(.FlowRepository.env$.FlowRepository.User.Email) && 
-    (nchar(.FlowRepository.env$.FlowRepository.User.Email) > 0) && 
-    !is.null(.FlowRepository.env$.FlowRepository.User.Password) && 
-    (nchar(.FlowRepository.env$.FlowRepository.User.Password) > 0)
+    !is.null(.FlowRepository.env$.FlowRepository.User.Email) && 
+        (nchar(.FlowRepository.env$.FlowRepository.User.Email) > 0) && 
+        !is.null(.FlowRepository.env$.FlowRepository.User.Password) && 
+        (nchar(.FlowRepository.env$.FlowRepository.User.Password) > 0)
 }
