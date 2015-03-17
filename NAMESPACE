@@ -1,18 +1,32 @@
-importFrom(XML, names.XMLNode, toString.XMLNode, xmlAttrs, xmlChildren,
-           xmlElementsByTagName, xmlGetAttr, xmlName, xmlNamespace,
-           xmlNode, xmlRoot, xmlSApply, xmlTreeParse, xmlTree)
+importFrom(
+    XML, names.XMLNode, toString.XMLNode, xmlAttrs, xmlChildren,
+    xmlElementsByTagName, xmlGetAttr, xmlName, xmlNamespace,
+    xmlNode, xmlRoot, xmlSApply, xmlTreeParse, xmlTree
+)
 
-importFrom(RCurl, getCurlHandle, getURLContent, postForm, curlPerform, CFILE, close)
+importFrom(
+    RCurl, getCurlHandle, getURLContent, postForm, curlPerform, CFILE, close
+)
 
-importFrom(tools, md5sum)
+importFrom(
+    tools, md5sum
+)
 
-export("flowRep.ls", "flowRep.get", "getFlowRepositoryURL", 
-       "setFlowRepositoryURL", "setFlowRepositoryCredentials",
-       "forgetFlowRepositoryCredentials")
+export(
+    "flowRep.ls", "flowRep.get", "getFlowRepositoryURL", 
+    "setFlowRepositoryURL", "setFlowRepositoryCredentials",
+    "forgetFlowRepositoryCredentials"
+)
 
-export("flowRepData", "fcsProxy", "attachmentProxy", "flowRepOrganization")
+export(
+    "flowRepData", "fcsProxy", "attachmentProxy", "flowRepOrganization"
+)
 
-exportClasses("flowRepData", "fcsProxy", "attachmentProxy", "flowRepOrganization")
+exportClasses(
+    "flowRepData", "fcsProxy", "attachmentProxy", "flowRepOrganization"
+)
 
-exportMethods("summary", "is.downloaded", "download")
+exportMethods(
+    "summary", "is.downloaded", "download", "id"
+)
 

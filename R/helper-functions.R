@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -28,7 +29,8 @@ getElValAsNum <- function(element)
     res
 }
 
-## Extracts a character value of an element, i.e., <value>text</value> --> "text"
+## Extracts a character value of an element, 
+## i.e., <value>text</value> --> "text"
 getElValAsChar <- function(element)
 {
     res <- NULL

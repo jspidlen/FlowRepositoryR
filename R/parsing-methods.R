@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -18,7 +19,6 @@
 ## strict liability, or tort arising in any way out of the use of this 
 ## software.    
 ###############################################################################
-
 
 setGeneric("parseFlowRepositoryXML", def=function(object, myEnv, ...)
     standardGeneric("parseFlowRepositoryXML"),
@@ -186,7 +186,7 @@ extractPublications <- function(object)
             }
         }
     }
-  ret
+    ret
 }
 
 
@@ -243,7 +243,8 @@ extractOrganizations <- function(object)
             
             if (!is.null(name))
             {
-                ret <- c(ret, flowRepOrganization(name=name, street=street, city=city, zip=zip, state=state, country=country))
+                ret <- c(ret, flowRepOrganization(name=name, street=street, 
+                    city=city, zip=zip, state=state, country=country))
             }
         }
     }

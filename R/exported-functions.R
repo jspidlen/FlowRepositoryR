@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -33,7 +34,7 @@ flowRep.ls <- function(include.private=FALSE) {
         curl=h, .opts=list(ssl.verifypeer=FALSE))
     close(f)
     if (include.private) flowRep.logout(h)
-  
+
     myEnv <- new.env()
     myEnv[['datasetIDs']] <- list()
     parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
@@ -49,7 +50,7 @@ flowRep.get <- function(id, use.credentials=TRUE) {
     destfile <- tempfile(pattern="FlowRepository.Dataset", tmpdir=tempdir(), 
         fileext=".xml")
     h <- getCurlHandle(cookiefile="")
-  
+
     if (use.credentials) flowRep.login(h)
     f <- CFILE(destfile, mode="wb")
     response <- curlPerform(url=paste0(getFlowRepositoryURL(), 
@@ -57,7 +58,7 @@ flowRep.get <- function(id, use.credentials=TRUE) {
         writedata=f@ref, curl=h, .opts=list(ssl.verifypeer=FALSE))
     close(f)
     if (use.credentials) flowRep.logout(h)
-  
+
     myEnv <- new.env()
     myEnv[[id]] <- list()
     parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)

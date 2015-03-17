@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -148,7 +149,7 @@ setClass("fcsProxy",
 fcsProxy <- function(name, url, size=0, md5sum=NULL, fcs.version=NULL, 
     localpath=NULL)
 {
-    new("fcsProxy", name=name, url=url, size=size, md5sum=md5sum, 
+    new("fcsProxy", name=name, url=url, size=size, md5sum=md5sum,
         fcs.version=fcs.version, localpath=localpath)
 }
 
@@ -157,12 +158,12 @@ setClass("attachmentProxy",
     representation=representation(description="characterOrNULL"),
     contains="fileProxy",
     prototype=list(
-       name="defaultAttachmentName.ext",
-       url=NULL,
-       size=0,
-       md5sum=NULL,
-       description=NULL,
-       localpath=NULL
+        name="defaultAttachmentName.ext",
+        url=NULL,
+        size=0,
+        md5sum=NULL,
+        description=NULL,
+        localpath=NULL
     )
 )
 

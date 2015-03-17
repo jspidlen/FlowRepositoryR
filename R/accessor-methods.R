@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -21,8 +22,9 @@
 
 
 if (!isGeneric("id")) {
-  if (is.function("id")) fun <- id
-  else fun <- function(object) standardGeneric("id")
-  setGeneric("id", fun)
+    if (is.function("id")) fun <- id
+    else fun <- function(object) standardGeneric("id")
+    setGeneric("id", fun)
 }
+
 setMethod("id", "flowRepData", function(object) object@id)

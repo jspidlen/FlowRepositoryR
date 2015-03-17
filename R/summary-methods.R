@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -21,33 +22,36 @@
 
 
 setMethod(
-  "summary",
-  signature = signature(object = "flowRepData"),
-  definition = function(object, ...)
-  {
-    cat(paste0("A flowRepData object (FlowRepository dataset) ", object@name, "\n",
-      length(object@fcs.files), " FCS files, ",
-      length(object@attachments), " attachments, ",
-      ifelse(is.downloaded(object), "", "NOT "), "downloaded\n"))
-  }
+    "summary",
+    signature=signature(object="flowRepData"),
+    definition=function(object, ...)
+    {
+        cat(paste0("A flowRepData object (FlowRepository dataset) ", 
+            object@name, "\n",
+        length(object@fcs.files), " FCS files, ",
+        length(object@attachments), " attachments, ",
+        ifelse(is.downloaded(object), "", "NOT "), "downloaded\n"))
+    }
 )
 
 setMethod(
-  "summary",
-  signature = signature(object = "fileProxy"),
-  definition = function(object, ...)
-  {
-    if (is.downloaded(object)) downloaded <- ' ('
-    else downloaded <- ' (NOT '
-    cat(paste0("A fileProxy object (proxy for a file) ", object@name, downloaded, "downloaded)\n"))
-  }
+    "summary",
+    signature=signature(object="fileProxy"),
+    definition=function(object, ...)
+    {
+        if (is.downloaded(object)) downloaded <- ' ('
+        else downloaded <- ' (NOT '
+        cat(paste0("A fileProxy object (proxy for a file) ", object@name, 
+            downloaded, "downloaded)\n"))
+    }
 )
 
 setMethod(
-  "summary",
-  signature = signature(object = "flowRepOrganization"),
-  definition = function(object, ...)
-  {
-    cat(paste(object@name, object@street, object@city, object@zip, object@state, object@country, sep="\n"))
-  }
+    "summary",
+    signature=signature(object="flowRepOrganization"),
+    definition=function(object, ...)
+    {
+        cat(paste(object@name, object@street, object@city, object@zip, 
+            object@state, object@country, sep="\n"))
+    }
 )

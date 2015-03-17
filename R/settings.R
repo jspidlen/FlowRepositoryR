@@ -1,9 +1,10 @@
 ###############################################################################
-## Copyright (©) 2015 Josef Spidlen, Ph.D.
-## 
+## Copyright (c) 2015 Josef Spidlen, Ph.D.
+##
 ## License
 ## The software is distributed under the terms of the 
-## GNU Lesser General Public License (LGPL)
+## Artistic License 2.0
+## http://www.r-project.org/Licenses/Artistic-2.0
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
@@ -18,7 +19,6 @@
 ## strict liability, or tort arising in any way out of the use of this 
 ## software.    
 ###############################################################################
-
 
 
 .FlowRepository.env <- new.env()
@@ -65,7 +65,7 @@ setFlowRepositoryCredentials <- function(filename=NULL, email=NULL,
         if (is.null(password) && interactive()) 
             password <- readline("Please enter your password: ")
     }
-  
+
     if (!is.null(email) && !is.null(password) && nchar(password) > 0 && 
         nchar(email) > 0) 
     {

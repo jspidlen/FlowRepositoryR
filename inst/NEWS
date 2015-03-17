@@ -1,3 +1,12 @@
+CHANGES IN VERSION 0.0.14
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    o Improved documentation and coding style fixes.
+    o Based on suggestions from R CMD check and BiocCheck
+
+
 CHANGES IN VERSION 0.0.13
 -------------------------
 
