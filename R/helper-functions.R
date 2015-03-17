@@ -24,7 +24,7 @@
 getElValAsNum <- function(element)
 {
     res <- NULL
-    try(res <- as.numeric(as.character(element[[1]]$value)), silent = TRUE)
+    try(res <- as.numeric(as.character(element[[1]]$value)), silent=TRUE)
     res
 }
 
@@ -32,7 +32,7 @@ getElValAsNum <- function(element)
 getElValAsChar <- function(element)
 {
     res <- NULL
-    try(res <- as.character(element[[1]]$value), silent = TRUE)
+    try(res <- as.character(element[[1]]$value), silent=TRUE)
     res
 }
 
@@ -40,20 +40,20 @@ getElValAsChar <- function(element)
 getElValAsLogicle <- function(element)
 {
     res <- NA
-    try(res <- as.logical(as.character(element[[1]]$value)), silent = TRUE)
+    try(res <- as.logical(as.character(element[[1]]$value)), silent=TRUE)
     if (is.na(res)) res <- NULL
     res
 }
 
 ## Parsing the XML tree and using classes created from element names
-smartTreeParse = function(file, ...) 
+smartTreeParse=function(file, ...) 
 {
-    handlers = list(
+    handlers=list(
         comment=function(x, ...)
         {
             NULL
         },
-        startElement = function(x, ...) 
+        startElement=function(x, ...) 
         {
             class(x)=c(paste(make.names(c(xmlNamespace(x), xmlName(x))), 
                 collapse="_"), make.names(xmlNamespace(x)), class(x))
@@ -66,14 +66,14 @@ smartTreeParse = function(file, ...)
 
 flowRep.login <- function(curlHandle)
 {
-    credentials = getFlowRepositoryCredentials()
-    response = postForm(paste0(getFlowRepositoryURL(), "loginapi"), 
-        email = credentials[1], pass = credentials[2], curl = curlHandle, 
-        .opts = list(ssl.verifypeer = FALSE)) 
+    credentials=getFlowRepositoryCredentials()
+    response=postForm(paste0(getFlowRepositoryURL(), "loginapi"), 
+        email=credentials[1], pass=credentials[2], curl=curlHandle, 
+        .opts=list(ssl.verifypeer=FALSE)) 
 }
 
 flowRep.logout <- function(curlHandle)
 {
-    response = getURLContent(paste0(getFlowRepositoryURL(), "logout"), 
-        curl = curlHandle, .opts = list(ssl.verifypeer = FALSE))   
+    response=getURLContent(paste0(getFlowRepositoryURL(), "logout"), 
+        curl=curlHandle, .opts=list(ssl.verifypeer=FALSE))   
 }

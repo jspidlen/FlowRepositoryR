@@ -48,12 +48,12 @@ getFlowRepositoryClientID <- function() {
 .FlowRepository.env$.FlowRepository.User.Password <- ''
 
 ## Exported
-setFlowRepositoryCredentials <- function(filename = NULL, email = NULL, 
-    password = NULL) 
+setFlowRepositoryCredentials <- function(filename=NULL, email=NULL, 
+    password=NULL) 
 {
     if(!is.null(filename)) {
-        con = file(filename, open="r")
-        line = readLines(con, 2) 
+        con=file(filename, open="r")
+        line=readLines(con, 2) 
         if (length(line) >= 2) {
             email <- line[1]
             password <- line[2]

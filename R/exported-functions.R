@@ -20,41 +20,48 @@
 ###############################################################################
 
 
-flowRep.ls <- function(include.private = FALSE) {
-  if (!haveFlowRepositoryCredentials()) include.private <- FALSE
-  destfile <- tempfile(pattern = "FlowRepository.DatasetList", tmpdir = tempdir(), fileext = ".xml")
-  h = getCurlHandle(cookiefile = "")
+flowRep.ls <- function(include.private=FALSE) {
+    if (!haveFlowRepositoryCredentials()) include.private <- FALSE
+    destfile <- tempfile(pattern="FlowRepository.DatasetList", 
+        tmpdir=tempdir(), fileext=".xml")
+    h <- getCurlHandle(cookiefile="")
 
-  if (include.private) flowRep.login(h)
-  f = CFILE(destfile, mode="wb")
-  response = curlPerform(url = paste0(getFlowRepositoryURL(), 'list?client=', getFlowRepositoryClientID()), writedata = f@ref, curl = h, .opts = list(ssl.verifypeer = FALSE))
-  close(f)
-  if (include.private) flowRep.logout(h)
+    if (include.private) flowRep.login(h)
+    f <- CFILE(destfile, mode="wb")
+    response <- curlPerform(url=paste0(getFlowRepositoryURL(), 
+        'list?client=', getFlowRepositoryClientID()), writedata=f@ref, 
+        curl=h, .opts=list(ssl.verifypeer=FALSE))
+    close(f)
+    if (include.private) flowRep.logout(h)
   
-  myEnv <- new.env()
-  myEnv[['datasetIDs']] <- list()
-  parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
-  try(file.remove(destfile), silent = TRUE)
-  unlist(myEnv[['datasetIDs']])
+    myEnv <- new.env()
+    myEnv[['datasetIDs']] <- list()
+    parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
+    try(file.remove(destfile), silent=TRUE)
+    unlist(myEnv[['datasetIDs']])
 }
 
 
-flowRep.get <- function(id, use.credentials = TRUE) {
-  if (!is.character(id)) stop('You need to specify a dataset identifier in order to get a FlowRepository dataset.')
-  if (!haveFlowRepositoryCredentials()) use.credentials <- FALSE
-  destfile <- tempfile(pattern = "FlowRepository.Dataset", tmpdir = tempdir(), fileext = ".xml")
-  h = getCurlHandle(cookiefile = "")
+flowRep.get <- function(id, use.credentials=TRUE) {
+    if (!is.character(id)) 
+        stop('Please specify a dataset identifier as a character string.')
+    if (!haveFlowRepositoryCredentials()) use.credentials <- FALSE
+    destfile <- tempfile(pattern="FlowRepository.Dataset", tmpdir=tempdir(), 
+        fileext=".xml")
+    h <- getCurlHandle(cookiefile="")
   
-  if (use.credentials) flowRep.login(h)
-  f = CFILE(destfile, mode="wb")
-  response = curlPerform(url = paste0(getFlowRepositoryURL(), 'list/', as.character(id), '?client=', getFlowRepositoryClientID()), writedata = f@ref, curl = h, .opts = list(ssl.verifypeer = FALSE))
-  close(f)
-  if (use.credentials) flowRep.logout(h)
+    if (use.credentials) flowRep.login(h)
+    f <- CFILE(destfile, mode="wb")
+    response <- curlPerform(url=paste0(getFlowRepositoryURL(), 
+        'list/', as.character(id), '?client=', getFlowRepositoryClientID()), 
+        writedata=f@ref, curl=h, .opts=list(ssl.verifypeer=FALSE))
+    close(f)
+    if (use.credentials) flowRep.logout(h)
   
-  myEnv <- new.env()
-  myEnv[[id]] <- list()
-  parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
-  try(file.remove(destfile), silent = TRUE)
-  unlist(myEnv[[id]])
+    myEnv <- new.env()
+    myEnv[[id]] <- list()
+    parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
+    try(file.remove(destfile), silent=TRUE)
+    unlist(myEnv[[id]])
 }
 
