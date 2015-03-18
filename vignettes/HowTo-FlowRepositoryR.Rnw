@@ -1,0 +1,178 @@
+% NOTE -- ONLY EDIT THE .Rnw FILE!
+% The .tex file will be overwritten.
+%
+%\VignetteIndexEntry{FlowRepository R Interface}
+%\VignetteDepends{FlowRepositoryR, flowCore}
+%\VignetteKeywords{FlowRepository}
+%\VignettePackage{FlowRepositoryR}
+\documentclass[11pt]{article}
+
+\usepackage{times}
+\usepackage{hyperref}
+\usepackage[authoryear,round]{natbib}
+\usepackage{times}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{subfigure}
+
+\textwidth=6.2in
+\textheight=8.5in
+\oddsidemargin=.1in
+\evensidemargin=.1in
+\headheight=-.3in
+
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rcode}[1]{{\texttt{#1}}}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rpackage}[1]{{\textsf{#1}}}
+\newcommand{\Rclass}[1]{{\textit{#1}}}
+
+
+
+\title{FlowRepositoryR: the FlowRepository R Interface}
+\author{Josef Spidlen}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+\maketitle
+
+\begin{abstract}
+
+FlowRepository is a free public flow cytometry data repository 
+intended for authors of peer-reviewed manuscripts to deposit their 
+underlying flow cytometry data, provide annotations, and share annotated 
+datasets upon publication.
+Primarily, FlowRepository is accessed via a web-based user interface
+(https://flowrepository.org/), however, it also includes an application
+programming interface (API), which allows for programmatic access from
+other software tools.
+FlowRepositoryR is an R library that utilizes this API allowing users
+to locate available datasets, review provided annotations and download 
+releated data files to their local file system, all this conveniently
+from within R without the need of opening a web browser. Downloaded 
+datasets can then be easily analyzed using flowCore and other libraries
+developed for this purpose.\\
+
+\noindent \textbf{Keywords:} FlowRepository, flow cytometry, data repository, 
+API, application programming interface, dataset download
+
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{Background}
+
+Data associated with publications should be available and accessible.
+Transparency and public availability of protocols, data, analyses, and 
+results are crucial to make sense of the complex biology of human diseases.
+Funding agencies, regulatory agencies, publishers, and the scientific 
+community have all recognized the importance of protecting cumulative 
+data outputs to accelerate subsequent exploitation through the 
+community-based development of public data repositories \citep{pmid19815759}.
+
+\subsection{FlowRepository}
+Until recently, no public repository existed for flow cytometry data.
+In order to address this issue, we developed 
+FlowRepository \citep{pmid22887982,pmid22752950} - a public resource 
+for authors to deposit their flow cytometry data, provide 
+MIFlowCyt \citep{pmid18752282} compliant annotation,
+and share annotated datasets upon publication.
+Development and maintenance of FlowRepository is generously supported 
+by the Wallace H. Coulter Foundation, the International Society for 
+Advancement of Cytometry (ISAC), the International Clinical Cytometry 
+Society, various research grants and the flow cytometry community
+in general.
+Technically, FlowRepository has been developed by extending and adapting 
+Cytobank \citep{pmid20578106}, an online tool for storage and collaborative 
+analysis of cytometric data.
+Primarily, FlowRepository is accessed via a web-based user interface
+(\url{https://flowrepository.org/}), however, it also includes an 
+XML-based application programming interface (API).
+This API allows for programmatic access from other software tools.
+
+\subsection{FlowRepositoryR}
+FlowRepositoryR is an R library that utilizes this API \citep{FlowRepositoryAPI} 
+to allow users locate available datasets, review annotations and download 
+releated data files to their local file system.
+Below, we will demonstrate how this library can be used.
+
+\section{Typical Use}
+
+\subsection{Requirements}
+
+You will need R libraries \Rpackage{XML}, \Rpackage{RCurl}, and 
+\Rpackage{tools} in order to install \Rpackage{FlowRepositoryR}.
+These are being used to parse the XML used to communicate with the
+FlowRepository server and to establish the HTTP(s) connection.
+If you are installing from BioConductor, biocLite should resolve
+those dependencies for you. 
+In addition, it is recommended to also have the \Rpackage{RUnit}
+library to be able to run unit tests. Finally, you will likely 
+want to have \Rpackage{flowCore} \citep{pmid19358741} and other 
+related libraries in order to analyze data from FlowRepository 
+datasets obtained using the \Rpackage{FlowRepositoryR} package.
+Assuming you have installed \Rpackage{FlowRepositoryR} already, 
+we will start by loading the library. 
+
+<<LoadPackage, echo=true,results=hide>>=
+library(FlowRepositoryR)
+@
+
+\subsection{List available datasets}
+
+FlowRepository has been live since 2012 and it continues to see a steady 
+increase in users, data submissions and downloads.
+As of March 2015, there are 440 datasets, 215 of those are public.
+The majority of the private datasets are presumed to be related to 
+manuscripts that are currently under peer-review and will be made 
+public once these manuscripts are published. You can use the 
+\Rfunction{flowRep.ls} function in order to list the identifiers
+of currently available datasets.
+
+<<ListDatasets, echo=true, results=verbatim>>=
+dataSets <- flowRep.ls()
+## We will only show a maximum of 10 identifiers so that we don't
+## clutter the vignette
+dataSets[1:min(10, length(dataSets))]
+@
+
+\subsection{Review information about a datasets}
+
+While an extended search functionality is being developed, for now
+we will assume that you know which dataset you are interested in.
+You can use the \Rfunction{flowRep.get} function in order to obtain 
+a dataset from FlowRepository. This will retrieve information about
+the dataset but it will not download the data.
+
+<<GetDataset, echo=true, results=verbatim>>=
+## FR-FCM-ZZZG is a "randomly" picked dataset that is public and 
+## small enough for the vignette to compile quickly
+ds <- flowRep.get("FR-FCM-ZZZG")
+summary(ds)
+@
+
+This will return a FlowRepository dataset represented by an object of
+the \Rclass{flowRepData} class.
+
+\subsection{Download the data}
+
+Data associated with a FlowRepository dataset can be downloaded using
+the \Rfunction{download} method of the \Rclass{flowRepData} class.
+
+<<DownloadData, echo=true, results=verbatim>>=
+ds <- download(ds)
+summary(ds)
+@
+
+\section{Representing FlowRepository Datasets}
+
+\subsection{The \Rclass{flowRepData} Class}
+
+FlowRepository datasets are represented by \Rclass{flowRepData} objects.
+
+\clearpage
+\bibliographystyle{plainnat} 
+\bibliography{Refs}
+\end{document}
