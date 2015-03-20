@@ -62,7 +62,7 @@
 }
 
 \examples{
-    myDataset <- flowRep.get("FR-FCM-ZZ3X")
+    myDataset <- flowRep.get("FR-FCM-ZZ46")
 }
 
 \keyword{methods}

@@ -1,7 +1,7 @@
 Package:        FlowRepositoryR
 Type:           Package
 Title:          FlowRepository R Interface
-Version:        0.0.15
+Version:        0.0.16
 Author:         Josef Spidlen [aut, cre]
 Authors@R:      c(person("Josef", "Spidlen", role = c("aut", "cre"),
                     email = "jspidlen@bccrc.ca"))

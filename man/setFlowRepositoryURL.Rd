@@ -54,9 +54,13 @@
     ## Check that it is set
     getFlowRepositoryURL()
     
-    ## Now set it back and check again
+    ## You would need to run your own local
+    ## FlowRepository instance on that URL for this to make sense
+
+    ## Communicate with your local FlowRepository instance
+    
+    ## Now set it back to the original URL
     setFlowRepositoryURL(tmpURL)
-    getFlowRepositoryURL()
 }
 
 \keyword{methods}

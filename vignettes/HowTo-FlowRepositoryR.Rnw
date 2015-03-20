@@ -93,7 +93,8 @@ XML-based application programming interface (API).
 This API allows for programmatic access from other software tools.
 
 \subsection{FlowRepositoryR}
-FlowRepositoryR is an R library that utilizes this API \citep{FlowRepositoryAPI} 
+FlowRepositoryR is an R library that utilizes this API 
+\citep{FlowRepositoryAPI} 
 to allow users locate available datasets, review annotations and download 
 releated data files to their local file system.
 Below, we will demonstrate how this library can be used.
@@ -147,9 +148,12 @@ a dataset from FlowRepository. This will retrieve information about
 the dataset but it will not download the data.
 
 <<GetDataset, echo=true, results=verbatim>>=
-## FR-FCM-ZZZG is a "randomly" picked dataset that is public and 
-## small enough for the vignette to compile quickly
-ds <- flowRep.get("FR-FCM-ZZZG")
+## FR-FCM-ZZJ7 is a purposely picked dataset that is public and very
+## small for the unit tests and the vignette and man pages to compile 
+## quickly. Also, FlowRepository is not tracking the downloads of this 
+## particular dataset since the stats would be based mainly on these 
+## automated downloads.
+ds <- flowRep.get("FR-FCM-ZZJ7")
 summary(ds)
 @
 

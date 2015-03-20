@@ -148,7 +148,7 @@
 }
 
 \examples{
-    myDataset <- flowRep.get("FR-FCM-ZZ3X")
+    myDataset <- flowRep.get("FR-FCM-ZZZG")
     summary(myDataset@fcs.files[[1]])
     str(myDataset@fcs.files[[1]])
 }

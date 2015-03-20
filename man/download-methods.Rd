@@ -77,37 +77,23 @@
 
 \examples{
     ## We will get a small dataset
-    mySmallDataset <- flowRep.get("FR-FCM-ZZ3X")
+    myDataset <- flowRep.get("FR-FCM-ZZJ7")
+    
     ## And download a single attachment file
-    mySmallDataset@attachments[[1]] <- download(mySmallDataset@attachments[[1]])
-    summary(mySmallDataset)
-    mySmallDataset@attachments[[1]]@localpath
-
-\dontrun{
-    ## A more usefull example will download the whole dataset etc.
-    ## We are tagging it as "Do Not RUN" since downloading a potentially 
-    ## large amount of data could get time consuming
-
-    ## Get a dataset
-    myDataset <- flowRep.get("FR-FCM-ZZ3X")
-
-    ## The files are not downloaded yet
+    ## mainly just to demonstrate that one can do one file at a time.
+    myDataset@attachments[[1]] <- download(myDataset@attachments[[1]])
     summary(myDataset)
+    myDataset@attachments[[1]]@localpath
 
-    ## We can find out about individual file proxies
+    ## We can also find out about individual FCS file proxies
     summary(myDataset@fcs.files[[1]])
 
-    ## A single file proxy can be downloaded
-    singleFile <- download(myDataset@fcs.files[[1]])
-    summary(singleFile)
+    ## A single FCS file proxy can be downloaded
+    myDataset@fcs.files[[1]] <- download(myDataset@fcs.files[[1]])
+    summary(myDataset@fcs.files[[1]])
 
     ## The file is downloaded to your home directory
-    singleFile@localpath
-
-    ## Next, you could use it with flowCore and friends, e.g.,
-    library(flowCore)
-    myData <- read.FCS(singleFile@localpath)
-    summary(myData)
+    myDataset@fcs.files[[1]]@localpath
 
     ## The code above is just to demonstrate that it is
     ## possible to get individial files. However, typically, 
@@ -121,6 +107,6 @@
 
     ## And this is where you find the attachments of that dataset
     unlist(lapply(myDataset@attachments, function(x) paste(x@localpath)))
-}}
+}
 
 \keyword{methods}
