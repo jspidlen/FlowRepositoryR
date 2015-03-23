@@ -159,6 +159,8 @@ summary(ds)
 
 This will return a FlowRepository dataset represented by an object of
 the \Rclass{flowRepData} class.
+See section \ref{l:flowrepdataclass} for more details about the dataset, or you can also
+use the \Rfunction{str} command to inspect the returned object
 
 \subsection{Download the data}
 
@@ -170,11 +172,236 @@ ds <- download(ds)
 summary(ds)
 @
 
+Assuming the dataset exists and you have permissions to access it, this 
+will download the whole dataset including all FCS files and attachment
+files associated with it. 
+Unless specified otherwise (see section \ref{l:downloadoptions}), the download
+method will create a new directory in your current working directory, name
+it based on the identifier of the dataset, and dowload the files there.
+A separate \texttt{attachments} subfolder will be created for the attachments.
+The location where these files were downloaded can
+be obtained from the local path slot of the file proxies. For example, the
+local path of the first downloaded dataset can be obtained as follows:
+
+<<WhereIsMyFile, echo=true, results=verbatim>>=
+ds@fcs.files[[1]]@localpath
+@
+
+If we wanted the local path of all the downloaded FCS files, we could use 
+the \Rfunction{lapply} function as follows:
+
+<<WhereAreMyFCSFiles, echo=true, results=verbatim>>=
+unlist(lapply(ds@fcs.files, function(x) paste(x@localpath)))
+@
+
+Analogically, we can locate all the attachments as follows:
+
+<<WhereAreMyAttachments, echo=true, results=verbatim>>=
+unlist(lapply(ds@attachments, function(x) paste(x@localpath)))
+@
+
+\subsection{Downloading private datasets}
+
+In order to download private dataset, you will need to register with
+FlowRepository. Open your web browser and navigate to 
+\url{http://flowrepository.org/}. Then follow the \textit{Login} link
+in the top right corner of the page. Next, either Sign-in or follow
+the registration link if you haven't signed up yet.
+FlowRepository uses OpenID or Google+ authentication. Those are used
+for web-based authentication. The \Rpackage{FlowRepositoryR} package
+(and FlowRepository API in general) use a email/password based authentication.
+This needs to be set in your profile independently. Once you have logged in
+in your web browser, click on the \textit{Welcome Your Name} link in
+the top right corner next to the \textit{Logout} link. This will enter your
+profile. Next, follow the \textit{Edit} link from the actions panel on your
+left. Scroll down and set your API password as shown in Figure 
+\ref{fig:SetFlowRepositoryAPIPassword}. The API password shall use 8 or 
+more characters and include at least one number, one upper-case character 
+and one lower-case character. Set your password and confirm it by
+clicking on the \textit{Update} button.
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=1\textwidth]{FlowRepositorySetAPIpasswd.png}
+\end{center}
+\caption{\textbf{Setting FlowRepository API access password.}
+FlowRepository uses OpenID or Google+ authentication for web-based access,
+but those are separate from the application programming access, which needs
+to be set in your profile by providing an API password.
+}
+\label{fig:SetFlowRepositoryAPIPassword}
+\end{figure}
+
+Once you have set your password online, you can use the 
+\Rfunction{setFlowRepositoryCredentials} to set your
+FlowRepository API credentials, which will give you access to
+non-public datasets created by you or shared with you in FlowRepository.
+<<setFlowRepositoryCredentials, echo=true, results=verbatim>>=
+setFlowRepositoryCredentials(email="boo@gmail.com", password="foo123456")
+@
+
+Alternativelly, you can provide the \texttt{filename} argument instead
+of the email and passwords arguments, which will read your credentials
+from a text file. This file shall include 2 lines, email address in the 
+first line, password in the second line.
+Finally, the function will prompt for credentials if called without 
+arguments in an interactive mode.
+
+Once your credentials are set, you can use the \texttt{include.private=TRUE}
+option of the \Rfunction{flowRep.ls()} function in order to include
+non-public dataset in the list of available datasets. In the 
+\Rfunction{download} method, if credentials are set then those will 
+be used automaticaly. You can disable this by passing the 
+\texttt{use.credentials=FALSE} argument to the \Rfunction{download} method of a
+\Rclass{flowRepData} object. 
+
+To conclude this section, let's forget the set credentials as the 
+\texttt{boo@gmail.com} email and \texttt{foo123456} password are not real
+credentials to access FlowRepository.
+<<forgetFlowRepositoryCredentials, echo=true, results=verbatim>>=
+forgetFlowRepositoryCredentials()
+@
+
+\subsection{Additional download options}
+\label{l:downloadoptions}
+
+The \texttt{dirpath} argument may be passed to the to the 
+\Rfunction{download} method of a \Rclass{flowRepData} object.
+This can be used to specify the directory on the local file system
+where the dataset shall be downloaded. By default, the files will 
+be downloaded to a folder named based on the dataset identifier (FR-FCM-xxxx), 
+which will be created in your current working directory.
+
+If you don't want to see the progress about files as they are being downloaded,
+you can turn this off by passing the \texttt{show.progress=FALSE} argument
+to the \Rfunction{download} method of a \Rclass{flowRepData} object.
+
+\subsection{Downloading only certain files from a dataset}
+
+Should you wish to download only some files of a FlowRepository
+dataset, you can do so by using the \Rfunction{download} method of 
+the \Rclass{fileProxy} objects (\textit{i.e}, \Rclass{fcsProxy} or 
+\Rclass{attachmentProxy}). For example
+
+<<DownloadDataPartially, echo=true, results=verbatim>>=
+myDataset <- flowRep.get("FR-FCM-ZZJ7")
+
+## And download a single attachment file
+myDataset@attachments[[1]] <- download(myDataset@attachments[[1]])
+myDataset@attachments[[1]]@localpath
+summary(myDataset@attachments[[1]])
+
+## A single FCS file proxy can be downloaded
+myDataset@fcs.files[[1]] <- download(myDataset@fcs.files[[1]])
+myDataset@fcs.files[[1]]@localpath
+summary(myDataset@fcs.files[[1]])
+@
+
+
 \section{Representing FlowRepository Datasets}
 
 \subsection{The \Rclass{flowRepData} Class}
+\label{l:flowrepdataclass}
 
 FlowRepository datasets are represented by \Rclass{flowRepData} objects.
+Slots of this class capture the metadata (information about) the dataset
+as follows:
+
+\begin{description}
+\item[\texttt{id}:]{Object of class \texttt{character} containing the
+    FlowRepository identified of the dataset. These identifiers are
+    typically in the form of \texttt{FR-FCM-}xxxx where xxxx represents
+    4 alphanumeric characters.}
+\item[\texttt{public.url}:]{Object of class \texttt{character} or
+    NULL containing the public URL of this dataset. This will 
+    commonly be in the form of
+    \texttt{https://flowrepository.org/id/}identifier, where 
+    identifier is the FlowRepository identified of the dataset.}
+\item[\texttt{name}:]{Object of class \texttt{character} or 
+    NULL containing the name of this dataset.}
+\item[\texttt{public}:]{Object of class \texttt{logical} or 
+    NULL containing the information whether this dataset is public.}
+\item[\texttt{primary.researcher}:]{Object of class \texttt{character} or
+    NULL containing the name of the primary researcher 
+    associated with this dataset.}
+\item[\texttt{primary.investigator}:]{Object of class \texttt{character} or
+    NULL containing the name of the primary investigator 
+    associated with this dataset.}
+\item[\texttt{uploader}:]{Object of class \texttt{character} or 
+    NULL containing the name of the uploader of this dataset.}
+\item[\texttt{experiment.dates}: ]{Object of class \texttt{character} or 
+    NULL containing the dates associated with this dataset. 
+    Typically, there will be two dates associated with the dataset, 
+    the first one for the start of the experiment, the second one 
+    for the end of the experiment. A single date indicates the start
+    of an experiment that may still be ongoing. The dates shall 
+    be encoded as "YYYY-MM-DD".}
+\item[\texttt{purpose}:]{Object of class \texttt{character} or 
+    NULL stating the purpose of this dataset (experiment).}
+\item[\texttt{conclusion}:]{Object of class \texttt{character} or 
+    NULL stating the conclusion associated with this dataset 
+    (typically conclusions reached by analyzing the data).}
+\item[\texttt{comments}:]{Object of class \texttt{character} or 
+    NULL stating additional comments associated with this dataset.}
+\item[\texttt{funding}:]{Object of class \texttt{character} or NULL 
+    stating the funding used to collect the data in this dataset.}
+\item[\texttt{qc.measures}:]{Object of class \texttt{character} or 
+    NULL stating the quality control measures taken in order to 
+    ensure the quality of data in this dataset.}
+\item[\texttt{miflowcyt.score}:]{Object of class \texttt{numeric} or 
+    NULL stating the MIFlowCyt compliance score of this experiment. 
+    MIFlowCyt is the Minimum Information about a Flow Cytometry 
+    Experiment - an ISAC Recommendation listing the minimum 
+    information that shall be provided as annotation of flow 
+    cytometry datasets. The MIFlowCyt compliance score is a value 
+    between 0 and 100 percent indicating the level of compliance 
+    with MIFlowCyt. Details about how FlowRepository calculates 
+    this score ara available here:
+    \url{http://flowrepository.org/quick_start_guide#MIFlowCytScoreReport}}
+\item[\texttt{keywords}:]{Object of class \texttt{list} (of objects 
+    of class \texttt{character}) enumerating keywords associated 
+    with this dataset.}
+\item[\texttt{publications}:]{Object of class \texttt{list} (of objects 
+    of class \texttt{character}) enumerating publications associated 
+    with this dataset. Publications are typically listed as
+    "PMID:12345678" or "PMCID:PMC1234567".}
+\item[\texttt{organizations}:]{Object of class \texttt{list} of objects 
+    of class \texttt{flowRepOrganization} (see section
+    \ref{l:flowRepOrganizationclass})
+    enumerating organizations associated with this dataset.}
+\item[\texttt{fcs.files}:]{Object of class \texttt{list} of objects 
+    of class \texttt{fcsProxy}
+    enumerating FCS files associated with this dataset.}
+\item[\texttt{attachments}:]{Object of class \texttt{list} of objects 
+    of class \texttt{attachmentProxy}
+    enumerating attachments associated with this dataset.}
+\end{description}
+
+
+\subsection{The \Rclass{flowRepOrganization} Class}
+\label{l:flowRepOrganizationclass}
+
+The \Rclass{flowRepOrganization} class represents the name and address of 
+an organization associated with a dataset stored in FlowRepository.
+Slots of this class capture the information as follows:
+
+\begin{description}
+\item[\texttt{name}:]{Object of class \texttt{character} containing the
+    name of the organization.}
+\item[\texttt{street}:]{Object of class \texttt{character} or NULL 
+    containing the street of the address of the organization.}
+\item[\texttt{city}:]{Object of class \texttt{character} or NULL 
+    containing the city of the address of the organization.}
+\item[\texttt{zip}:]{Object of class \texttt{character} or NULL 
+    containing the zip (or postal code) of the address of the 
+    organization.}
+\item[\texttt{state}:]{Object of class \texttt{character} or NULL 
+    containing the state (or province) of the address of the 
+    organization.}
+\item[\texttt{country}:]{Object of class \texttt{character} or NULL 
+    containing the country of the address of the organization.}
+\end{description}
+
 
 \clearpage
 \bibliographystyle{plainnat} 

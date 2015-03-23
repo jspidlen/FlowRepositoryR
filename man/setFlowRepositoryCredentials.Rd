@@ -16,7 +16,7 @@
     to FlowRepository in your web browser in order to setup your API 
     password.\cr
     This function can set your credetials based on credentials stored in 
-    a file (2 lines, email address in on the first line, password in the
+    a file (2 lines, email address in the first line, password in the
     second line), or you can provide email and/or password as arguments 
     of this function, or the function will ask for credentials if called
     without arguments in an interactive mode.

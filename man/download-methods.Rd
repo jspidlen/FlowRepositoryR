@@ -29,8 +29,8 @@
 
     \describe{
         \item{\code{dirpath=NULL}}{The path to the directory where to 
-            download the files. By default, the files will be downloaded a 
-            a folder named based on the dataset identifier (FR-FCM-xxxx) 
+            download the files. By default, the files will be downloaded to a 
+            folder named based on the dataset identifier (FR-FCM-xxxx) 
             that will be created in your working directory.}
         \item{\code{use.credentials=TRUE}}{Whether to use stored credentials 
             to login before downloading the dataset.
