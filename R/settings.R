@@ -23,9 +23,13 @@
 
 .FlowRepository.env <- new.env()
 
-#.FlowRepository.env$.FlowRepository.URL <- 'http://localhost/'
-#.FlowRepository.env$.FlowRepository.URL <- 'http://flowrepository.org/'
+## .FlowRepository.env$.FlowRepository.URL <- 'http://localhost/'
+## .FlowRepository.env$.FlowRepository.URL <- 'http://flowrepository.org/'
 .FlowRepository.env$.FlowRepository.URL <- 'https://flowrepository.org/'
+
+## This clientID is specific for FlowRepositoryR. If you need a clientID
+## for a different tool to work with FlowRepository API, please contact
+## FlowRepository administrators at flowrepository-admin@isac-net.org
 .FlowRepository.env$.FlowRepository.ClientID <- 'FlowRepositoryRyzJl74CNkUp1Kpb'
 
 ## Exported

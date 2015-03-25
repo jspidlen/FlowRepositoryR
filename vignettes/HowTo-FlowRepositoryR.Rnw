@@ -159,8 +159,8 @@ summary(ds)
 
 This will return a FlowRepository dataset represented by an object of
 the \Rclass{flowRepData} class.
-See section \ref{l:flowrepdataclass} for more details about the dataset, or you can also
-use the \Rfunction{str} command to inspect the returned object
+See section \ref{l:flowrepdataclass} for more details about the dataset, or 
+you can also use the \Rfunction{str} command to inspect the returned object.
 
 \subsection{Download the data}
 
