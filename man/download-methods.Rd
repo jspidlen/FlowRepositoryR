@@ -78,22 +78,22 @@
 \examples{
     ## We will get a small dataset
     myDataset <- flowRep.get("FR-FCM-ZZJ7")
+    summary(myDataset)
     
     ## And download a single attachment file
     ## mainly just to demonstrate that one can do one file at a time.
-    myDataset@attachments[[1]] <- download(myDataset@attachments[[1]])
-    summary(myDataset)
-    myDataset@attachments[[1]]@localpath
-
+    att1 <- download(attachments(myDataset)[[1]])
+    localpath(att1)
+    
     ## We can also find out about individual FCS file proxies
-    summary(myDataset@fcs.files[[1]])
+    summary(fcs.files(myDataset)[[1]])
 
     ## A single FCS file proxy can be downloaded
-    myDataset@fcs.files[[1]] <- download(myDataset@fcs.files[[1]])
-    summary(myDataset@fcs.files[[1]])
+    fcs1 <- download(fcs.files(myDataset)[[1]])
+    summary(fcs1)
 
     ## The file is downloaded to your home directory
-    myDataset@fcs.files[[1]]@localpath
+    localpath(fcs1)
 
     ## The code above is just to demonstrate that it is
     ## possible to get individial files. However, typically, 
@@ -103,10 +103,10 @@
 
     ## This downloaded all the files to your home directory
     ## This is where you find your data
-    unlist(lapply(myDataset@fcs.files, function(x) paste(x@localpath)))
+    unlist(lapply(fcs.files(myDataset), function(x) paste(localpath(x))))
 
     ## And this is where you find the attachments of that dataset
-    unlist(lapply(myDataset@attachments, function(x) paste(x@localpath)))
+    unlist(lapply(attachments(myDataset), function(x) paste(localpath(x))))
 }
 
 \keyword{methods}

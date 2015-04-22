@@ -5,6 +5,9 @@
 \alias{summary,fileProxy-method}
 \alias{is.downloaded,fileProxy-method}
 \alias{download,fileProxy-method}
+\alias{localpath}
+\alias{localpath,fileProxy-method}
+\alias{localpath,fileProxy,localpath-method}
 
 \title{'fileProxy': a class representing a proxy to a file in FlowRepository}
 
@@ -85,6 +88,13 @@
             \emph{Usage:}
             \code{is.downloaded(fileProxy)}
         }
+        
+        \item{localpath}{Return and object of class \code{character} or NULL 
+            containing the path the FlowRepository file as saved on the local 
+            file system. This slot is used to determine whether the file has 
+            been downloaded to the local file system. A value of NULL 
+            indicates that the file has not been downloaded.
+        }
 
     }
 }
@@ -102,6 +112,15 @@
 
 \seealso{
     \code{\linkS4class{fcsProxy}}, \code{\linkS4class{attachmentProxy}}
+}
+
+\examples{
+    ## Obtain dataset information from FlowRepository
+    myDataset <- flowRep.get("FR-FCM-ZZZG")
+    is(fcs.files(myDataset)[[1]], "fileProxy")
+    ## It should be as fcsProxy is a fileProxy
+    is(attachments(myDataset)[[1]], "fileProxy")
+    ## It should be as attachmentProxy is a fileProxy
 }
 
 \keyword{classes}

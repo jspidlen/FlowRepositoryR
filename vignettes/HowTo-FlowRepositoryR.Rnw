@@ -139,6 +139,21 @@ dataSets <- flowRep.ls()
 dataSets[1:min(10, length(dataSets))]
 @
 
+\subsection{Searching for a dataset}
+
+You can use the \Rfunction{flowRep.search} function in order to 
+search for public datasets matching your search criteria. 
+Only public datasets are being searched at this point.
+The search covers experiment names, repository identifiers, keywords,
+researcher first and last names, reagents and reagent manufactures,
+instruments and instrument manufactures, sample annotations and
+manuscript identifiers. A vector of identifiers of matching
+datasets is retrieved. NULL is returned if no matching datasets are found.
+
+<<SearchDatasets, echo=true, results=verbatim>>=
+flowRep.search("OMIP-016")
+@
+
 \subsection{Review information about a datasets}
 
 While an extended search functionality is being developed, for now
@@ -184,25 +199,25 @@ be obtained from the local path slot of the file proxies. For example, the
 local path of the first downloaded dataset can be obtained as follows:
 
 <<WhereIsMyFile, echo=true, results=verbatim>>=
-ds@fcs.files[[1]]@localpath
+localpath(fcs.files(ds)[[1]])
 @
 
 If we wanted the local path of all the downloaded FCS files, we could use 
 the \Rfunction{lapply} function as follows:
 
 <<WhereAreMyFCSFiles, echo=true, results=verbatim>>=
-unlist(lapply(ds@fcs.files, function(x) paste(x@localpath)))
+unlist(lapply(fcs.files(ds), function(x) paste(localpath(x))))
 @
 
-Analogically, we can locate all the attachments as follows:
+Analogously, we can locate all the attachments as follows:
 
 <<WhereAreMyAttachments, echo=true, results=verbatim>>=
-unlist(lapply(ds@attachments, function(x) paste(x@localpath)))
+unlist(lapply(attachments(ds), function(x) paste(localpath(x))))
 @
 
 \subsection{Downloading private datasets}
 
-In order to download private dataset, you will need to register with
+In order to download a private dataset, you will need to register with
 FlowRepository. Open your web browser and navigate to 
 \url{http://flowrepository.org/}. Then follow the \textit{Login} link
 in the top right corner of the page. Next, either Sign-in or follow
@@ -285,16 +300,17 @@ the \Rclass{fileProxy} objects (\textit{i.e}, \Rclass{fcsProxy} or
 
 <<DownloadDataPartially, echo=true, results=verbatim>>=
 myDataset <- flowRep.get("FR-FCM-ZZJ7")
+summary(myDataset)
 
 ## And download a single attachment file
-myDataset@attachments[[1]] <- download(myDataset@attachments[[1]])
-myDataset@attachments[[1]]@localpath
-summary(myDataset@attachments[[1]])
+at1 <- download(attachments(myDataset)[[1]])
+localpath(at1)
+summary(at1)
 
 ## A single FCS file proxy can be downloaded
-myDataset@fcs.files[[1]] <- download(myDataset@fcs.files[[1]])
-myDataset@fcs.files[[1]]@localpath
-summary(myDataset@fcs.files[[1]])
+fcs1 <- download(fcs.files(myDataset)[[1]])
+localpath(fcs1)
+summary(fcs1)
 @
 
 

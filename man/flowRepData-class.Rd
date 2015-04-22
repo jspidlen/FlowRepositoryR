@@ -6,6 +6,19 @@
 \alias{is.downloaded,flowRepData-method}
 \alias{download,flowRepData-method}
 \alias{id,flowRepData-method}
+\alias{fcs.files}
+\alias{fcs.files,flowRepData-method}
+\alias{fcs.files,flowRepData,fcs.files-method}
+\alias{fcs.files<-}
+\alias{fcs.files<-,flowRepData-method}
+\alias{attachments}
+\alias{attachments,flowRepData-method}
+\alias{attachments,flowRepData,attachments-method}
+\alias{attachments<-}
+\alias{attachments<-,flowRepData-method}
+\alias{organizations}
+\alias{organizations,flowRepData-method}
+\alias{organizations,flowRepData,organizations-method}
 
 \title{'flowRepData': a class for storing metadata 
     about a FlowRepository dataset}
@@ -153,7 +166,7 @@
             "PMID:12345678" or "PMCID:PMC1234567".
         }
 
-        \item{\code{organizations}:}{Object of class \code{list} of objects 
+        \item{\code{organizations}:}{Object of class \code{list} of objects
             of class \code{\linkS4class{flowRepOrganization}}
             enumerating organizations associated with this dataset.
         }
@@ -206,6 +219,21 @@
             See \code{\link{id}} for details.
             \emph{Usage:}
             \code{id(flowRepData)}
+        }
+
+        \item{fcs.files}{Return an object of class \code{list} of objects 
+            of class \code{\linkS4class{fcsProxy}}
+            enumerating FCS files associated with this dataset.
+        }
+
+        \item{attachments}{Return an object of class \code{list} of objects 
+            of class \code{\linkS4class{attachmentProxy}}
+            enumerating attachments associated with this dataset.
+        }
+
+        \item{organizations}{Return an object of class \code{list} of objects
+            of class \code{\linkS4class{flowRepOrganization}}
+            enumerating organizations associated with this dataset.
         }
 
     }

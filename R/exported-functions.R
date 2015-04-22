@@ -8,7 +8,7 @@
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
-## This software is provided "as is" and any and any express or implied 
+## This software is provided "as is" and any express or implied 
 ## warranties, including, but not limited to, the implied warranties of
 ## merchantability and fitness for a particular purpose are disclaimed.
 ## In no event shall the  copyright holder be liable for any direct, 
@@ -64,5 +64,34 @@ flowRep.get <- function(id, use.credentials=TRUE) {
     parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
     try(file.remove(destfile), silent=TRUE)
     unlist(myEnv[[id]])
+}
+
+flowRep.search <- function(query.string) {
+    if((!is(query.string, "character")) || nchar(query.string) == 0)
+        stop("query.string shall be a non-empty string", call.=FALSE)
+    query.string <- URLencode(query.string, reserved=TRUE, repeated=TRUE)
+
+    ## This is just getting ready for when the API supports this, at this point
+    ## public datasets only are being searched.
+    include.private <- FALSE
+    if (!haveFlowRepositoryCredentials()) include.private <- FALSE
+    destfile <- tempfile(pattern="FlowRepository.DatasetList", 
+        tmpdir=tempdir(), fileext=".xml")
+    h <- getCurlHandle(cookiefile="")
+
+    if (include.private) flowRep.login(h)
+    f <- CFILE(destfile, mode="wb")
+    response <- curlPerform(url=paste0(getFlowRepositoryURL(), 
+        'apisearch?client=', getFlowRepositoryClientID(), '&query_term=',
+        query.string), 
+        writedata=f@ref, curl=h, .opts=list(ssl.verifypeer=FALSE))
+    close(f)
+    if (include.private) flowRep.logout(h)
+
+    myEnv <- new.env()
+    myEnv[['datasetIDs']] <- list()
+    parseFlowRepositoryXML(xmlRoot(smartTreeParse(destfile)), myEnv)
+    try(file.remove(destfile), silent=TRUE)
+    unlist(myEnv[['datasetIDs']])
 }
 

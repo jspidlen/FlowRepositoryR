@@ -51,7 +51,7 @@
 \examples{
     myDataset <- flowRep.get("FR-FCM-ZZ3X")
     is.downloaded(myDataset)
-    is.downloaded(myDataset@fcs.files[[1]])
+    is.downloaded(fcs.files(myDataset)[[1]])
 }
 
 \keyword{methods}

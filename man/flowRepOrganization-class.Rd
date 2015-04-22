@@ -93,7 +93,7 @@
 
 \examples{
     myDataset <- flowRep.get("FR-FCM-ZZ47")
-    summary(myDataset@organizations[[1]])
+    summary(organizations(myDataset)[[1]])
 }
 
 \keyword{classes}

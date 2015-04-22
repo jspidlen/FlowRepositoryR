@@ -131,8 +131,8 @@
 
 \examples{
     myDataset <- flowRep.get("FR-FCM-ZZ3X")
-    summary(myDataset@attachments[[1]])
-    str(myDataset@attachments[[1]])
+    summary(attachments(myDataset)[[1]])
+    str(attachments(myDataset)[[1]])
 }
 
 \keyword{classes}

@@ -12,10 +12,16 @@ importFrom(
     tools, md5sum
 )
 
+importFrom(
+    utils, URLencode
+)
+
 export(
-    "flowRep.ls", "flowRep.get", "getFlowRepositoryURL", 
+    "flowRep.ls", "flowRep.get", "flowRep.search",
+    "getFlowRepositoryURL", 
     "setFlowRepositoryURL", "setFlowRepositoryCredentials",
-    "forgetFlowRepositoryCredentials"
+    "forgetFlowRepositoryCredentials",
+    "fcs.files<-", "attachments<-"
 )
 
 export(
@@ -27,6 +33,7 @@ exportClasses(
 )
 
 exportMethods(
-    "summary", "is.downloaded", "download", "id"
+    "summary", "is.downloaded", "download", "id", "fcs.files", "attachments",
+    "fcs.files<-", "attachments<-", "localpath", "organizations"
 )
 

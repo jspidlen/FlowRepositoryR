@@ -8,7 +8,7 @@
 ## 
 ## Disclaimer
 ## This software and documentation come with no warranties of any kind.
-## This software is provided "as is" and any and any express or implied 
+## This software is provided "as is" and any express or implied 
 ## warranties, including, but not limited to, the implied warranties of
 ## merchantability and fitness for a particular purpose are disclaimed.
 ## In no event shall the  copyright holder be liable for any direct, 

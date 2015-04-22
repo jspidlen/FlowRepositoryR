@@ -1,6 +1,20 @@
 # FlowRepositoryR
 R library to access FlowRepository.org 
 
+## Getting the latest version
+The FlowRepositoryR is a BioConductor library. It can be installed as follows
+```R
+> source("http://bioconductor.org/biocLite.R")
+> biocLite("FlowRepositoryR")
+```
+See BioConductor for the latest version and updated documentation.
+
+Latest release version:
+http://bioconductor.org/packages/release/bioc/html/FlowRepositoryR.html
+
+Latest devel version:
+http://bioconductor.org/packages/devel/bioc/html/FlowRepositoryR.html
+
 ## Quick Start Guide
 
 Load the library
