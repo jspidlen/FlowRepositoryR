@@ -37,6 +37,6 @@ setMethod(
     signature=signature(object="IMPCAnalysis"),
     definition=function(object, id, value, ...)
     {
-        
+        object@impc.parameters[[id]] <- value
     }
 )
