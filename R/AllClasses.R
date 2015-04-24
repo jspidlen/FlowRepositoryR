@@ -211,6 +211,33 @@ flowRepOrganization <- function(name, street=NULL, city=NULL, zip=NULL,
 }
 
 
+## Definition of the IMPCAnalysis class
+setClass("IMPCAnalysis",
+    representation=representation(
+        impc.experiment.id="characterOrNULL",
+        analyzed.by="characterOrNULL",
+        impc.parameters="environment"
+    ),
+    prototype=list(
+        impc.experiment.id=NULL,
+        analyzed.by=NULL,
+        impc.parameters=new.env()),
+    ## TODO Add validity conditions
+    validity=function(object) {}
+)
+
+## Constructor
+IMPCAnalysis <- function(
+    impc.experiment.id=NULL, analyzed.by=NULL, impc.parameters=new.env())
+{
+    new("IMPCAnalysis", 
+        impc.experiment.id=impc.experiment.id,
+        analyzed.by=analyzed.by,
+        impc.parameters=impc.parameters
+    )
+}
+
+
 ## These are just dummy classes to help parse the XML "nicely"
 setClass("FlowRepository")
 setClass("api.version", representation=representation(), 
