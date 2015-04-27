@@ -99,6 +99,20 @@
     impc_imm_076_001 = "RP Macrophage (CD19- CD11c-)"
 )
 
+.impc.centers <- list(
+    Rbri = "BC Cancer Agency",
+    BCM =  "Baylor College of Medicine",
+    Gmc =  "Helmholtz Zentrum Munchen",
+    H =    "MRC Harwell",
+    Ics =  "Institut Clinique de la Souris",
+    J =    "The Jackson Laboratory",
+    Tcp =  "The Toronto Centre for Phenogenomics",
+    Ning = "Nanjing University",
+    Rbrc = "RIKEN Tsukuba Institute, BioResource Center",
+    Ucd =  "University of California, Davis",
+    WTSI = "Wellcome Trust Sanger Institute"
+)
+
 setGeneric(
     "add.result",
     def=function(object, ...) standardGeneric("add.result"),

@@ -61,7 +61,18 @@ setMethod(
     signature=signature(object="IMPCAnalysis"),
     definition=function(object, ...)
     {
-        cat("IMPC Analysis:\n")
-        cat(paste(lapply(ls(env=object@impc.parameters), function(key) {paste0(key,"=",object@impc.parameters[[key]])})), sep=", ")
+        cat("IMPC analysis by", 
+            ifelse(is.null(object@analyzed.by), 
+                "annonymous", 
+                ifelse(object@analyzed.by %in% names(.impc.centers), 
+                    .impc.centers[[object@analyzed.by]],
+                    object@analyzed.by
+                )
+            ), 
+            "\n"
+        )
+        cat(paste(lapply(ls(env=object@impc.parameters), function(key) {
+            paste0(key,"=",object@impc.parameters[[key]])
+        })), sep=", ")
     }
 )

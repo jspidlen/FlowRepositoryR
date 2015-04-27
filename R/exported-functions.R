@@ -98,3 +98,7 @@ flowRep.search <- function(query.string) {
 impc.parameter.dictionary <- function() {
     .impc.par.dict
 }
+
+impc.center.dictionary <- function() {
+    .impc.centers
+}
