@@ -55,3 +55,13 @@ setMethod(
             object@state, object@country, sep="\n"))
     }
 )
+
+setMethod(
+    "summary",
+    signature=signature(object="IMPCAnalysis"),
+    definition=function(object, ...)
+    {
+        cat("IMPC Analysis:\n")
+        cat(paste(lapply(ls(env=object@impc.parameters), function(key) {paste0(key,"=",object@impc.parameters[[key]])})), sep=", ")
+    }
+)

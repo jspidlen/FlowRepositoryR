@@ -95,3 +95,6 @@ flowRep.search <- function(query.string) {
     unlist(myEnv[['datasetIDs']])
 }
 
+impc.parameter.dictionary <- function() {
+    .impc.par.dict
+}

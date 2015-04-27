@@ -214,23 +214,29 @@ flowRepOrganization <- function(name, street=NULL, city=NULL, zip=NULL,
 ## Definition of the IMPCAnalysis class
 setClass("IMPCAnalysis",
     representation=representation(
+        .flowRep.id="numericOrNULL",
         impc.experiment.id="characterOrNULL",
         analyzed.by="characterOrNULL",
         impc.parameters="environment"
     ),
     prototype=list(
+        .flowRep.id=NULL,
         impc.experiment.id=NULL,
         analyzed.by=NULL,
         impc.parameters=new.env()),
     ## TODO Add validity conditions
-    validity=function(object) {}
+    validity=function(object) {
+        !is.element(FALSE, unlist(lapply(ls(env=object@impc.parameters), function(key) {key %in% names(.impc.par.dict)})))
+    }
 )
 
 ## Constructor
 IMPCAnalysis <- function(
-    impc.experiment.id=NULL, analyzed.by=NULL, impc.parameters=new.env())
+    .flowRep.id=NULL, impc.experiment.id=NULL, analyzed.by=NULL, 
+    impc.parameters=new.env())
 {
     new("IMPCAnalysis", 
+        .flowRep.id=.flowRep.id,
         impc.experiment.id=impc.experiment.id,
         analyzed.by=analyzed.by,
         impc.parameters=impc.parameters
