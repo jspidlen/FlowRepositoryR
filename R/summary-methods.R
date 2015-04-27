@@ -71,6 +71,8 @@ setMethod(
             ), 
             "\n"
         )
+        cat("IMPC experiment id", ifelse(is.null(object@impc.experiment.id), 
+            "unknown", "impc.experiment.id"), "\n")
         cat(paste(lapply(ls(env=object@impc.parameters), function(key) {
             paste0(key,"=",object@impc.parameters[[key]])
         })), sep=", ")
